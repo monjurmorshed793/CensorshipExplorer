@@ -1,7 +1,14 @@
 package org.censorship.spring;
 
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.applayout.AbstractAppRouterLayout;
+import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.AppLayoutMenu;
+import com.vaadin.flow.component.applayout.AppLayoutMenuItem;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
@@ -15,21 +22,30 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 
-@Route("")
+//@Route("")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
-public class MainView extends Div implements BeforeEnterObserver {
+public class MainView extends AbstractAppRouterLayout {
+    public MainView() {
+    }
 
     @Override
-    public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-        if(SecurityContextHolder.getContext().getAuthentication()==null)
-            beforeEnterEvent.forwardTo("login");
+    protected void configure(AppLayout appLayout, AppLayoutMenu appLayoutMenu) {
+        appLayout.setBranding(new Span("Censorship Detector").getElement());
+        appLayoutMenu.addMenuItem(new AppLayoutMenuItem("ISP", "isp"));
+        appLayoutMenu.addMenuItem(new AppLayoutMenuItem("Web Address", "web-address"));
+        appLayoutMenu.addMenuItem(new AppLayoutMenuItem("Censorship Status", "censorship-status"));
+        appLayoutMenu.addMenuItem(new AppLayoutMenuItem("Sniffers", "sniffer"));
+        appLayoutMenu.addMenuItem(new AppLayoutMenuItem("Log out", e->logout()));
     }
 
-    public MainView(@Autowired MessageBean bean) {
-
-        Button button = new Button("Click me",
-                e -> Notification.show(bean.getMessage()));
-        add(button);
+    private void logout(){
+        SecurityContextHolder.clearContext();
+        UI.getCurrent().getSession().close();
+        UI.getCurrent().navigate("login");
     }
 
+    @Override
+    public void showRouterLayoutContent(HasElement content) {
+        super.showRouterLayoutContent(content);
+    }
 }

@@ -23,6 +23,7 @@ public class LoginView extends Div {
 
 
     public LoginView() {
+        SecurityContextHolder.clearContext();
         loginOverlay.setTitle("Censorship Explorer");
         loginOverlay.setDescription("Login to access your information");
         final UI currentUi = UI.getCurrent();
