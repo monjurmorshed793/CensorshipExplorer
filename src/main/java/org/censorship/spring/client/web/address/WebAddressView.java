@@ -50,6 +50,7 @@ public class WebAddressView extends HorizontalLayout implements BeforeEnterObser
         Button uploadButton = new Button("Upload");
         uploadButton.addClickListener(e->openFileUploadDialog());
         Button removeButton = new Button("Remove All");
+        removeButton.addClickListener(e->webAddressRepository.deleteAll());
         buttonGroup.add(uploadButton, removeButton);
         content.add(buttonGroup);
         content.setAlignSelf(Alignment.END, buttonGroup);

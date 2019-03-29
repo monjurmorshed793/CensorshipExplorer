@@ -39,6 +39,8 @@ public class ExcelWebAddressFileExtractionService {
         while(rows.hasNext()){
             Row row = rows.next();
             Cell cell = row.getCell(0);
+            if(cell==null)
+                break;
             WebAddress webAddress = new WebAddress();
             webAddress.setName(cell.getStringCellValue());
             webAddressList.add(webAddress);
