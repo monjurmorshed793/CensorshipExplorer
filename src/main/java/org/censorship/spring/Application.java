@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * The entry point of the Spring Boot application.
  */
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@EnableCaching
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
