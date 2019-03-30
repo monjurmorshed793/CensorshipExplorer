@@ -17,8 +17,14 @@ public class CensorshipStatus {
     @Column(name = "web_address_id")
     private Long webAddressId;
 
-    @Column(name="censorship_type")
-    private CensorshipType censorshipType;
+    @Column(name="dns_censorship_type")
+    private CensorshipType dnsCensorshipType;
+
+    @Column(name="tcp_ip_censorship_type")
+    private CensorshipType tcpIpCensorshipType;
+
+    @Column(name="http_censorship_type")
+    private CensorshipType httpCensorshipType;
 
     @Column(name="ooni_censorship_type")
     private CensorshipType ooniCensorshipType;
@@ -50,12 +56,12 @@ public class CensorshipStatus {
         this.webAddressId = webAddressId;
     }
 
-    public CensorshipType getCensorshipType() {
-        return censorshipType;
+    public CensorshipType getDnsCensorshipType() {
+        return dnsCensorshipType;
     }
 
-    public void setCensorshipType(CensorshipType censorshipType) {
-        this.censorshipType = censorshipType;
+    public void setDnsCensorshipType(CensorshipType dnsCensorshipType) {
+        this.dnsCensorshipType = dnsCensorshipType;
     }
 
     public CensorshipType getOoniCensorshipType() {
@@ -66,13 +72,19 @@ public class CensorshipStatus {
         this.ooniCensorshipType = ooniCensorshipType;
     }
 
-    @Override
-    public String toString() {
-        return "CensorshipStatus{" +
-                "id=" + id +
-                ", webAddressId=" + webAddressId +
-                ", censorshipType=" + censorshipType +
-                ", ooniCensorshipType=" + ooniCensorshipType +
-                '}';
+    public CensorshipType getTcpIpCensorshipType() {
+        return tcpIpCensorshipType;
+    }
+
+    public void setTcpIpCensorshipType(CensorshipType tcpIpCensorshipType) {
+        this.tcpIpCensorshipType = tcpIpCensorshipType;
+    }
+
+    public CensorshipType getHttpCensorshipType() {
+        return httpCensorshipType;
+    }
+
+    public void setHttpCensorshipType(CensorshipType httpCensorshipType) {
+        this.httpCensorshipType = httpCensorshipType;
     }
 }

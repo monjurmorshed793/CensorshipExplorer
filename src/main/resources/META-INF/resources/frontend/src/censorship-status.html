@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="censorship-status">
+    <template>
+        <vaadin-vertical-layout id="content">
+            <vaadin-horizontal-layout id="searchGroup">
+                <vaadin-select id="ispSelect"></vaadin-select>
+                <vaadin-button id="censorshipCheckButton">Check Censorship Status</vaadin-button>
+                <vaadin-button id="censorshipHistoryButton">Check Censorship History</vaadin-button>
+            </vaadin-horizontal-layout>
+        </vaadin-vertical-layout>
+    </template>
+
+    <script>
+        class CensorshipStatusTemplate extends Polymer.Element{
+            static get is(){
+                return 'censorship-status'
+            }
+        }
+
+        customElements.define(CensorshipStatusTemplate.is, CensorshipStatusTemplate);
+    </script>
+
+</dom-module>

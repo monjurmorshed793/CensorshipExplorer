@@ -47,7 +47,14 @@ public class DNSCensorshipDetectorService {
     private boolean checkWhetherIpAddressListIsSameOrNot(String webAddress) throws Exception{
         webAddress = refactorWebAddress(webAddress);
         List<String> hostIpAddresses = resolveIpAddresses(webAddress);
-        List<String> cloudIpAddresses = resolveIpAddressesFromCloud(webAddress);
+        System.setProperty("sun.net.spi.nameservice.nameservers", "8.8.8.8");
+        System.setProperty("sun.net.spi.nameservice.provider.1", "dns,sun");
+        List<String> cloudIpAddresses = resolveIpAddresses(webAddress);
+        //List<String> cloudIpAddresses = resolveIpAddressesFromCloud(webAddress);
+
+        // rollback dns server
+        System.setProperty("sun.net.spi.nameservice.nameservers", "127.0.0.1");
+        System.setProperty("sun.net.spi.nameservice.provider.1", "dns,sun");
         return hostIpAddresses.containsAll(cloudIpAddresses);
     }
 
